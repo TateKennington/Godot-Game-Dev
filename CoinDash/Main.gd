@@ -1,14 +1,45 @@
 extends Node
 
 var score = 0
-var timeleft = 0
+var timeleft = 30
+
+export (PackedScene) var coinScene
+
+func startGame():
+	score = 0;
+	timeleft = 30;
+	$HUD.updateScore(score)
+	$HUD.updateTimer(timeleft);
+	$GameplayTimer.start();
+	spawnCoin()
+	pass
+
+func gameOver():
+	$GameplayTimer.stop()
+	$Player.die()
+	pass
 
 func _on_GameplayTimer_timeout():
-	$Player.die();
+	timeleft-=1
+	$HUD.updateTimer(timeleft)
+	#TODO: GameOver
 	pass
 
 
 func _on_Player_pickup():
 	score+=1
-	print(str(score))
+	timeleft+=10
+	$HUD.updateScore(score)	
+	$HUD.updateTimer(timeleft)
+	spawnCoin()
+	pass
+
+func spawnCoin():
+	var c = coinScene.instance()
+	var screenSize = get_viewport().get_visible_rect().size;
+	$Coins.add_child(c)
+	c.position = Vector2(rand_range(0, screenSize.x), rand_range(0, screenSize.y))
+	while $Player.position.distance_to(c.position) < 300:
+		c.position = Vector2(rand_range(0, screenSize.x), rand_range(0, screenSize.y))
+	
 	pass
