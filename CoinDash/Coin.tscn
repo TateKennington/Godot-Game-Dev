@@ -21,6 +21,7 @@ extents = Vector2( 82.6804, 81.7379 )
 "pickup",
 ]]
 
+scale = Vector2( 0.590428, 0.590428 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -29,6 +30,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
