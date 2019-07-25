@@ -2,7 +2,7 @@
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -98,6 +98,36 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin" ]
 
+[node name="GameoverLabel" type="Label" parent="." index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Game Over"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GameoverTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = true
+autostart = false
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+
+[connection signal="timeout" from="GameoverTimer" to="." method="reset"]
 
 

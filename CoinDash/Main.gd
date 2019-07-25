@@ -8,8 +8,9 @@ export (PackedScene) var coinScene
 func startGame():
 	score = 0;
 	timeleft = 30;
-	$HUD.updateScore(score)
+	$HUD.startGame()
 	$HUD.updateTimer(timeleft)
+	$HUD.updateScore(score)
 	$Player.start()
 	$GameplayTimer.start()
 	spawnCoins(1)
@@ -20,8 +21,7 @@ func gameOver():
 	$Player.die()
 	for coin in $Coins.get_children():
 		coin.queue_free()
-	$HUD/StartButton.show()
-	$HUD/StartButton.disabled = false
+	$HUD.gameOver()
 	pass
 
 func _on_GameplayTimer_timeout():
