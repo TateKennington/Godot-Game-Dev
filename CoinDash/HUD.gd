@@ -28,7 +28,6 @@ func _on_StartButton_pressed():
 	emit_signal("game_start")
 	pass
 
-
 func reset():
 	$GameoverLabel.hide()
 	$StartButton.show()

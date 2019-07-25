@@ -2,18 +2,20 @@ extends Node
 
 var score = 0
 var timeleft = 30
+var level = 0
 
 export (PackedScene) var coinScene
 
 func startGame():
-	score = 0;
-	timeleft = 30;
+	score = 0
+	level = 0
+	timeleft = 30
 	$HUD.startGame()
 	$HUD.updateTimer(timeleft)
 	$HUD.updateScore(score)
 	$Player.start()
 	$GameplayTimer.start()
-	spawnCoins(1)
+	spawnCoins(5)
 	pass
 
 func gameOver():
@@ -34,10 +36,13 @@ func _on_GameplayTimer_timeout():
 
 func _on_Player_pickup():
 	score+=1
-	timeleft+=2
+	print($Coins.get_child_count())
+	if $Coins.get_child_count() == 1:
+		level += 1
+		spawnCoins(5+level)
+		timeleft+=5	
 	$HUD.updateScore(score)	
 	$HUD.updateTimer(timeleft)
-	spawnCoins(1)
 	pass
 
 func spawnCoins(num):
